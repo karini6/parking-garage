@@ -1,0 +1,48 @@
+.arrival-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.arrival-form__input-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.arrival-form__button-group {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrival-form label {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.arrival-form input {
+  padding: 0.5rem;
+  width: 10rem;
+  border: 1px solid #005f5f;
+  border-radius: 0.06125rem;
+  margin-bottom: 1.5rem;
+}
+
+.arrival-form select {
+  padding: 0.5rem;
+  width: 10rem;
+  border: 1px solid #005f5f;
+  border-radius: 0.06125rem;
+  margin-bottom: 1.5rem;
+}
+
+&:focus {
+  border-color: #005f5f;
+  outline: none;
+}

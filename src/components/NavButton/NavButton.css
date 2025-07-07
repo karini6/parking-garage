@@ -7,6 +7,7 @@
   text-decoration: none;
   color: #fff;
   width: auto;
+  transition: box-shadow 0.25s;
 
   &.primary-btn {
     background-color: #007272;
