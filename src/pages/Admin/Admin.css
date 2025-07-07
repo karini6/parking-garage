@@ -1,0 +1,42 @@
+.admin-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+  background-color: #e9f8f4;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  height: 30rem;
+  width: 20rem;
+  padding: 2rem;
+  margin: 2rem;
+}
+
+.floor-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.garage-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.data-item {
+  display: inline-block;
+  font-weight: bold;
+  color: #14555a;
+}

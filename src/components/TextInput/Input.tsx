@@ -10,6 +10,7 @@ type TextInputProps = {
   type?: "text" | "password" | "email" | "number";
   required?: boolean;
   disabled?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextInput = ({
@@ -22,6 +23,7 @@ const TextInput = ({
   direction = "column",
   required = false,
   disabled = false,
+  onChange,
 }: TextInputProps) => {
   return (
     <div className={`input-container ${direction}`}>
@@ -43,6 +45,11 @@ const TextInput = ({
         disabled={disabled}
         className="input-field"
         aria-labelledby={`${id}-label`}
+        onChange={(event) => {
+          if (onChange) {
+            onChange(event);
+          }
+        }}
       />
     </div>
   );

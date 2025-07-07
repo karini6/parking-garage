@@ -5,6 +5,6 @@ import RouteDefs from './RouteDefs.tsx';
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouteDefs />
+      <RouteDefs />
   </StrictMode>
 );

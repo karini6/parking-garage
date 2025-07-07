@@ -17,7 +17,7 @@ const Confirmation = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      void navigate(`/${paths.home}`);
+      void navigate(`${paths.home}`);
     }, 5000); 
     return () => clearTimeout(timer);
   }, [navigate]);

@@ -30,6 +30,7 @@ export default tseslint.config([
     },
     rules: {
       "@typescript-eslint/consistent-type-definitions": "off",
+      "no-empty-function": "off",
     },
   },
 ]);

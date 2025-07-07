@@ -1,8 +1,9 @@
-import { useState, type FormEvent } from "react";
+import { use, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import Button from "../../components/Button/Button";
 import Select from "../../components/Select/Select";
 import TextInput from "../../components/TextInput/Input";
+import { DataContext } from "../../context/DataContext";
 import { floorOptions } from "../../mockData/floorOptions";
 import paths from "../../paths";
 import { Direction, Variant } from "../../types/enums";
@@ -19,20 +20,40 @@ const formInitialState: ArrivalForm = {
 };
 
 const Arrival = () => {
+  const { setFloorData } = use(DataContext);
     const navigate = useNavigate();
-
     const [form, setForm] = useState<ArrivalForm>(formInitialState);
 
-    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      console.log("Selected floor:", event.target.value);
+    const handleFloorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       setForm((prevForm) => ({
         ...prevForm,
         floor: event.target.value,
       }));
     };
 
+    const handleRegNumberChange = (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      setForm((prevForm) => ({
+        ...prevForm,
+        registrationNumber: event.target.value,
+      }));
+    };
+
     const handleClick = (e: FormEvent<HTMLButtonElement>) => {
       e.preventDefault();
+      const currentFloor = Number(form.floor);
+      setFloorData((prevFloorData) =>
+        prevFloorData.map((floor) =>
+          floor.floorNumber === currentFloor
+            ? {
+                ...floor,
+                availableSpots: floor.availableSpots - 1,
+                occupiedSpots: floor.occupiedSpots + 1,
+              }
+            : floor
+        )
+      );
       void navigate(
         { pathname: `/${paths.confirmation}` },
         { state: { arrivingFrom: "arriving" } }
@@ -54,7 +75,7 @@ const Arrival = () => {
               id="floor-select"
               aria-label="Select floor"
               value={form.floor}
-              onChange={handleSelectChange}
+              onChange={handleFloorChange}
             />
           </div>
           <div className="arrival-form__input-group">
@@ -65,7 +86,8 @@ const Arrival = () => {
               ariaLabel="Registration number"
               placeholder="Enter registration number"
               type="text"
-              direction="column"
+              direction={Direction.column}
+              onChange={handleRegNumberChange}
               required
             />
           </div>
