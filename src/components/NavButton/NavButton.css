@@ -1,0 +1,30 @@
+.nav-btn {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  margin: 0.5rem;
+  border-radius: 1.25rem;
+  border-width: 0.0625rem;
+  text-decoration: none;
+  color: #fff;
+  width: auto;
+  transition: box-shadow 0.25s;
+
+  &.primary-btn {
+    background-color: #007272;
+  }
+
+  &.secondary-btn {
+    background-color: #fff;
+    color: #007272;
+    box-shadow: inset 0 0 0 0.0625rem #007272;
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 0.125rem #007272;
+  }
+
+  &.large {
+    height: 2rem;
+    line-height: 2rem;
+  }
+}
