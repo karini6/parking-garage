@@ -3,11 +3,11 @@ import "./Button.css";
 
 type Variant = "primary" | "secondary";
 
-interface ButtonProps {
+type ButtonProps = {
   variant?: Variant;
   text: string;
   type: "button" | "submit";
-  handleClick: (e: FormEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: FormEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
 

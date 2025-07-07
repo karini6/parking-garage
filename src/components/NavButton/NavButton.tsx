@@ -4,7 +4,7 @@ import "./NavButton.css";
 type Variant = "primary" | "secondary";
 
 
-interface NavButtonProps {
+type NavButtonProps = {
   variant?: Variant;
   text: string;
   navTo: string;

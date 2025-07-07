@@ -1,16 +1,41 @@
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import Button from "../../components/Button/Button";
+import Select from "../../components/Select/Select";
+import TextInput from "../../components/TextInput/Input";
+import { floorOptions } from "../../mockData/floorOptions";
 import paths from "../../paths";
+import { Direction, Variant } from "../../types/enums";
 import "./Arrival.css";
+
+type ArrivalForm = {
+  floor: string;
+  registrationNumber: string;
+}
+
+const formInitialState: ArrivalForm = {
+  floor: "0",
+  registrationNumber: "",
+};
 
 const Arrival = () => {
     const navigate = useNavigate();
+
+    const [form, setForm] = useState<ArrivalForm>(formInitialState);
+
+    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      console.log("Selected floor:", event.target.value);
+      setForm((prevForm) => ({
+        ...prevForm,
+        floor: event.target.value,
+      }));
+    };
+
     const handleClick = (e: FormEvent<HTMLButtonElement>) => {
       e.preventDefault();
       void navigate(
         { pathname: `/${paths.confirmation}` },
-        { state: { from: "arriving" } }
+        { state: { arrivingFrom: "arriving" } }
       );
     };
 
@@ -19,31 +44,36 @@ const Arrival = () => {
         <h1>I'm arriving</h1>
         <form className="arrival-form">
           <div className="arrival-form__input-group">
-            <label htmlFor="floor">Floor</label>
-            <select name="floor" id="floor">
-              <option value="">--Please choose a floor</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+            {/** In a real world scenario, the app would know which floor it is on, no need for user to provide this info  */}
+            <Select
+              name="Floor"
+              label="Which floor are you on?"
+              options={floorOptions}
+              direction={Direction.column}
+              required
+              id="floor-select"
+              aria-label="Select floor"
+              value={form.floor}
+              onChange={handleSelectChange}
+            />
           </div>
           <div className="arrival-form__input-group">
-            <label htmlFor="registration-number">Registration number</label>
-            <input
-              type="text"
-              placeholder="Enter registration number"
+            <TextInput
+              id="regNumber"
               name="registration number"
-              aria-label="Registration number"
-              id="registration-number"
+              label="Registration number"
+              ariaLabel="Registration number"
+              placeholder="Enter registration number"
+              type="text"
+              direction="column"
+              required
             />
           </div>
           <div className="arrival-form__button-group">
             <Button
               text="Start parking"
               type="submit"
-              variant="primary"
+              variant={Variant.primary}
               handleClick={handleClick}
             />
           </div>

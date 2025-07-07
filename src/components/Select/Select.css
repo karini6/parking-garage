@@ -1,0 +1,122 @@
+.select-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  &.column {
+    flex-direction: column;
+  }
+}
+.select-label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+::picker(select) {
+  top: calc(anchor(bottom) + 1px);
+  left: anchor(10%);
+}
+
+option {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select {
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+  padding: 0.5rem;
+  width: 10rem;
+  box-shadow: 0 0 0 0.5px #14555a;
+  border-radius: 0.06125rem;
+  margin-bottom: 1.5rem;
+  flex: 1;
+  width: 12rem;
+  padding: 0.5rem;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+select:hover,
+select:focus,
+select:focus-visible {
+  box-shadow: 0 0 0 2px #14555a;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+select::picker-icon {
+  color: #007272;
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+::picker(select) {
+  border: none;
+}
+option {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  transition: 0.2s;
+  background-color: #fff;
+  border-bottom: solid 1px #b3d5d5;
+  border-left: solid 1px #b3d5d5;
+  border-right: solid 1px #b3d5d5;
+}
+
+option:first-of-type {
+  border-radius: 8px 8px 0 0;
+  border-top: solid 1px #b3d5d5;
+}
+
+option:last-of-type {
+  border-radius: 0 0 8px 8px;
+  border-bottom: solid 1px #b3d5d5;
+}
+
+option:hover,
+option:focus {
+  background: #f4fbf9;
+  color: #00343e;
+  cursor: pointer;
+}
+
+option:checked {
+  background: #007272;
+  color: #fff;
+}
+
+selectedcontent .icon {
+  display: none;
+}
+
+::picker(select) {
+  opacity: 0;
+  transition: all 0.4s allow-discrete;
+}
+::picker(select):popover-open {
+  opacity: 1;
+}
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+  }
+}
+::picker(select) {
+  top: calc(anchor(bottom) + 1px);
+  left: anchor(10%);
+}

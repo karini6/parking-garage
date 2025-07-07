@@ -1,0 +1,36 @@
+.input-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  &.column {
+    flex-direction: column;
+  }
+}
+
+.input-label {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+.input-field {
+  padding: 0.5rem;
+  width: 12rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 0 0.06125rem #14555a;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  box-sizing: border-box;
+  box-shadow: 0 0 0 0.125rem #007272;
+}
+
+.input-field:focus-visible {
+  outline: none;
+}
