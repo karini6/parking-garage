@@ -1,6 +1,7 @@
 export type ButtonVariant = {
   primary: "primary";
   secondary: "secondary";
+  tertiary: "tertiary";
 };
 export type Direction = { column: "column"; row: "row" };
 
@@ -8,6 +9,7 @@ export type SelectOption = {
   value: string | number;
   label: string;
   disabled?: boolean;
+  disabledText?: string;
 };
 
 export type Garage = {
@@ -19,10 +21,7 @@ export type Garage = {
   totalSpots: number;
   availableSpots: number;
   occupiedSpots: number;
-  firstHourRate: number;
-  secondHourRate: number;
-  additionalHoursRate: number;
-  currency: string;
+  prices: PriceModel;
 };
 
 export type ParkingSlot = {
@@ -35,11 +34,12 @@ export type ParkingSlot = {
 
 export type ParkingSession = {
   id: string;
-  slotId: string;
+  slotId?: string;
   vehicleRegistration: string;
   startTime: Date;
   endTime?: Date;
   totalCost?: number;
+  floorId: number;
 };
 
 export type Floor = {
@@ -49,4 +49,14 @@ export type Floor = {
   totalSpots: number;
   availableSpots: number;
   occupiedSpots: number;
+};
+
+export type PriceModel = {
+  firstHourRate: number;
+  secondHourRate: number;
+  additionalHoursRate: number;
+  firstHourMinuteRate?: number;
+  secondHourMinuteRate?: number;
+  additionalMinutesRate?: number;
+  currency: string;
 };

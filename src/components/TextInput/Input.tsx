@@ -6,6 +6,7 @@ type TextInputProps = {
   label: string;
   ariaLabel?: string;
   placeholder?: string;
+  value?: string;
   direction?: "column" | "row";
   type?: "text" | "password" | "email" | "number";
   required?: boolean;
@@ -20,6 +21,7 @@ const TextInput = ({
   label,
   ariaLabel,
   type,
+  value,
   direction = "column",
   required = false,
   disabled = false,
@@ -37,6 +39,7 @@ const TextInput = ({
       </label>
       <input
         type={type ?? "text"}
+        value={value}
         placeholder={placeholder}
         name={name}
         aria-label={ariaLabel ?? label}

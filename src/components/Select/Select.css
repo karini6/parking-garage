@@ -89,8 +89,8 @@ option:last-of-type {
   border-bottom: solid 1px #b3d5d5;
 }
 
-option:hover,
-option:focus {
+option:not(.disabled):hover,
+option:not(.disabled):focus {
   background: #f4fbf9;
   color: #00343e;
   cursor: pointer;
@@ -100,6 +100,18 @@ option:checked {
   background: #007272;
   color: #fff;
 }
+
+option:disabled:hover {
+  background: #fff;
+  color: #737373;
+  cursor: default;
+}
+
+/* option.disabled:hover,
+option.disabled:focus {
+  background: #fff;
+  color: #eee;
+} */
 
 selectedcontent .icon {
   display: none;

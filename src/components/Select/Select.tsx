@@ -1,3 +1,4 @@
+import type { SelectOption } from "../../types/types";
 import "./Select.css";
 
 
@@ -8,7 +9,7 @@ type SelectProps = {
   required?: boolean;
   disabled?: boolean;
   direction?: "column" | "row";
-  options: { value: string | number; label: string }[];
+  options: SelectOption[];
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
   value?: string;
@@ -27,8 +28,6 @@ const Select = ({
   required = false,
   disabled = false,
 }: SelectProps) => {
-
-
   return (
     <div className={`select-container ${direction}`}>
       <label htmlFor={id} aria-label={label} className="input-label">
@@ -50,16 +49,15 @@ const Select = ({
             key={option.value}
             value={option.value}
             aria-label={option.label}
+            className={`${disabled}`}
+            disabled={option.disabled}
           >
-            {option.label}
+            {`${option.label} ${option.disabled ? option.disabledText : ""}`}
           </option>
         ))}
-        <option value="" disabled={!options.length}>
-          Please choose an option
-        </option>
       </select>
     </div>
   );
-};
+}
 
 export default Select;

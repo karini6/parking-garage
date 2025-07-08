@@ -5,12 +5,12 @@
   border-radius: 1.25rem;
   border-width: 0.0625rem;
   text-decoration: none;
-  color: #fff;
-  width: auto;
+  width: fit-content;
   transition: box-shadow 0.25s;
 
   &.primary-btn {
     background-color: #007272;
+    color: #fff;
   }
 
   &.secondary-btn {
@@ -19,8 +19,26 @@
     box-shadow: inset 0 0 0 0.0625rem #007272;
   }
 
-  &:hover {
+  &.tertiary-btn {
+    background-color: transparent;
+    color: #007272;
+    border-bottom: solid 1px #007272;
+    border-radius: 0;
+  }
+
+  &.primary-btn:hover {
+    cursor: pointer;
+  }
+
+  &.secondary-btn:hover {
     box-shadow: inset 0 0 0 0.125rem #007272;
+    transition: box-shadow ease-in-out 0.25s;
+  }
+
+  &.tertiary-btn:hover {
+    font-weight: 600;
+    border-bottom: solid 2px #007272;
+    transition: font-weight ease-in-out 0.25s, border-bottom 0.25s ease-in-out;
   }
 
   &.large {

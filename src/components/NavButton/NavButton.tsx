@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import "./NavButton.css";
 
-type Variant = "primary" | "secondary";
+type Variant = "primary" | "secondary" | "tertiary";
 
 
 type NavButtonProps = {

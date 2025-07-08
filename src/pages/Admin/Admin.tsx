@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import Select from "../../components/Select/Select";
-import { floorOptions } from "../../mockData/floorOptions";
-import { floorData, garageData } from "../../mockData/garage";
 import { Direction } from "../../types/enums";
 import type { Floor } from "../../types/types";
 
+import { DataContext } from "../../context/DataContext";
+import useFloorOptions from "../../hooks/useFloorOptions";
 import "./Admin.css";
 
 const Admin = () => {
+  const {floorData, garageData} = use(DataContext)
     const [selectedFloor, setSelectedFloor] = useState<Floor | null>(null);
+    const { floorSelectOptions } = useFloorOptions();
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newValue = Number(event.target.value)
@@ -18,29 +20,29 @@ const Admin = () => {
 
     return (
       <>
-        <h1>Availability overview</h1>
+        <h1>Availability</h1>
         <div className="admin-container">
           <div className="info-wrapper garage-info">
-            <h2>Garage Information</h2>
+            <h2>Garage in total</h2>
             <div className="data-item-wrapper">
-              <p>
-                Total available spots:{" "}
-                <p className="data-item">{garageData?.availableSpots}</p>
-              </p>
+              <p>Total available spots: </p>
+              <p className="data-item">{garageData?.availableSpots}</p>
             </div>
             <div className="data-item-wrapper">
-              <p>
-                Total occupied spots:{" "}
-                <p className="data-item">{garageData?.occupiedSpots}</p>
-              </p>
+              <p>Total occupied spots: </p>
+              <p className="data-item">{garageData?.occupiedSpots}</p>
             </div>
           </div>
           <div className="info-wrapper">
-            <h2>Floor {selectedFloor?.floorNumber} Information</h2>
+            {selectedFloor?.floorNumber ? (
+              <h2>Per floor</h2>
+            ) : (
+              <h3>Floor {selectedFloor?.floorNumber}</h3>
+            )}
             <Select
               name="Floor"
               label="Select floor"
-              options={floorOptions}
+              options={floorSelectOptions}
               direction={Direction.column}
               required
               id="floor-select"
@@ -51,16 +53,12 @@ const Admin = () => {
             {selectedFloor && (
               <div className="floor-info">
                 <div className="data-item-wrapper">
-                  <p>
-                    Available spots:{" "}
-                    <p className="data-item">{selectedFloor?.availableSpots}</p>
-                  </p>
+                  <p>Available spots: </p>
+                  <p className="data-item">{selectedFloor?.availableSpots}</p>
                 </div>
                 <div className="data-item-wrapper">
-                  <p>
-                    Occupied spots:{" "}
-                    <p className="data-item">{selectedFloor?.occupiedSpots}</p>
-                  </p>
+                  <p>Occupied spots: </p>
+                  <p className="data-item">{selectedFloor?.occupiedSpots}</p>
                 </div>
               </div>
             )}

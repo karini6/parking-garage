@@ -3,8 +3,8 @@ import type { ButtonVariant, Direction as DirectionType } from "./types";
 export const Variant: ButtonVariant = {
   primary: "primary",
   secondary: "secondary",
+  tertiary: "tertiary",
 } as const;
-export type VariantType = (typeof Variant)[keyof typeof Variant];
 
 export const Direction: DirectionType = {
   column: "column",

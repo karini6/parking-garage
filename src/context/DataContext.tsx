@@ -7,8 +7,9 @@ import {
 import {
   floorData as floorDataMock,
   garageData as garageDataMock,
+  priceData as priceDataMock,
 } from "../mockData/garage";
-import type { Floor, Garage } from "../types/types";
+import type { Floor, Garage, ParkingSession, PriceModel } from "../types/types";
 
 
 type DataProviderType = {
@@ -17,17 +18,21 @@ type DataProviderType = {
 
 type DataContextType = {
   garageData: Garage | null;
-  setGarageData: React.Dispatch<React.SetStateAction<Garage | null>>;
   floorData: Floor[];
-  setFloorData: React.Dispatch<React.SetStateAction<Floor[]>>;
+  parkedVehiclesData: ParkingSession[];
+  priceData: PriceModel;
+  handleParkingEnd: (currentFloor: number, regNumber: string) => void;
+  handleNewParking: (currentFloor: number, regNumber: string) => void;
 };
 
 
 const DataContext = createContext<DataContextType>({
   garageData: garageDataMock,
-  setGarageData: () => {},
   floorData: floorDataMock,
-  setFloorData: () => {},
+  parkedVehiclesData: [],
+  priceData: priceDataMock,
+  handleParkingEnd: () => {},
+  handleNewParking: () => {},
 });
 
 
@@ -35,7 +40,15 @@ const DataContext = createContext<DataContextType>({
 const DataProvider = ({ children }: DataProviderType) => {
 
   const value = useMemo(
-    () => ({ garageData: null, setGarageData: () => {}, floorData: [], setFloorData: () => {} }),
+    () => ({
+      garageData: null,
+      floorData: [],
+      parkedVehiclesData: [],
+      priceData: priceDataMock,
+      setPriceData: () => {},
+      handleParkingEnd: () => {},
+      handleNewParking: () => {},
+    }),
     []
   );
 

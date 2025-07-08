@@ -1,0 +1,18 @@
+.message {
+  margin: 0.5rem;
+  box-sizing: border-box;
+}
+
+.contexttent-wrapper {
+  display: flex;
+}
+
+.message-heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.action-container {
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+}
