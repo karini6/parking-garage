@@ -1,4 +1,4 @@
-# DNB Parking Garage
+# DNB Parking Garage [simplified]
 
 Welcome to the DNB parking garage!
 
