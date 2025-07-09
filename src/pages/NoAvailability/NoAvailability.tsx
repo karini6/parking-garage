@@ -1,9 +1,9 @@
 const NoAvailability = () => {
   return (
     <>
-      <h1>No Availability</h1>
+      <h2>All the slots are taken</h2>
       <p>Unfortunately, there are no available parking spots at the moment.</p>
-      <p>Please try again later or check back for updates.</p>
+      <p>Please try again later.</p>
     </>
   );
 };

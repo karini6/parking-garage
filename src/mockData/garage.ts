@@ -5,7 +5,7 @@ export const parkedVehiclesData: ParkingSession[] = [
     id: "session-1",
     slotId: "slot-1",
     vehicleRegistration: "AB12345",
-    startTime: new Date("2025-07-09T10:00:00Z"),
+    startTime: new Date("2025-07-09T09:12:58Z"),
     floorId: 1,
   },
   {

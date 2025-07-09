@@ -90,7 +90,7 @@ const Arrival = () => {
         return;
       }
 
-      if(!form.registrationNumber || !form.floor) {
+      if(!form.registrationNumber || form.floor === "0") {
         setInfoMessage({ text: "Please fill in all fields."});
         return;
       }
@@ -105,60 +105,60 @@ const Arrival = () => {
 
     return (
       <>
-        <div style={{ minHeight: "15rem", boxSizing: "border-box" }}>
+          <NavButton text="Go back" navTo={paths.home} variant="tertiary" />
           <h1>Register new parking</h1>
-
+        <div style={{ minHeight: "15rem", boxSizing: "border-box" }}>
           {infoMessage?.text && (
             <Message text={infoMessage?.text} action={infoMessage?.action} />
           )}
         </div>
-        <form className="arrival-form">
-          <div className="arrival-form__input-group">
-            {/** In a real world scenario, the app would know which floor it is on, no need for user to provide this info  */}
-            <Select
-              name="Floor"
-              label="Which floor are you on?"
-              options={floorSelectOptions}
-              direction={Direction.column}
-              required
-              id="floor-select"
-              aria-label="Select floor"
-              // value={form.floor}
-              onChange={handleFloorChange}
-            />
+        <div className="page-content-wrapper">
+          <form className="arrival-form">
+            <div className="arrival-form-input-group">
+              <Select
+                name="Floor"
+                label="Which floor are you on?"
+                options={floorSelectOptions}
+                direction={Direction.column}
+                required
+                id="floor-select"
+                aria-label="Select floor"
+                onChange={handleFloorChange}
+              />
+            </div>
+            <div className="arrival-form-input-group">
+              <TextInput
+                id="regNumber"
+                name="registration number"
+                label="Registration number"
+                ariaLabel="Registration number"
+                placeholder="Enter registration number"
+                type="text"
+                direction={Direction.column}
+                onChange={handleRegNumberChange}
+                required
+                value={form.registrationNumber}
+              />
+            </div>
+            <div className="arrival-form-button-group">
+              <Button
+                text="Start parking"
+                type="submit"
+                variant={Variant.primary}
+                handleClick={handleClick}
+              />
+            </div>
+          </form>
+          <div className="pricing-wrapper">
+            <h2 className="pricing-header">Pricing</h2>
+            <p className="pricing-item">
+              {`1st hour: ${garageData.prices.firstHourRate} ${garageData.prices.currency}`}
+            </p>
+            <p className="pricing-item">
+              {`2nd hour: ${garageData.prices.secondHourRate} ${garageData.prices.currency}`}
+            </p>
+            <p className="pricing-item">{`Additional hours: ${garageData.prices.additionalHoursRate} ${garageData.prices.currency}`}</p>
           </div>
-          <div className="arrival-form__input-group">
-            <TextInput
-              id="regNumber"
-              name="registration number"
-              label="Registration number"
-              ariaLabel="Registration number"
-              placeholder="Enter registration number"
-              type="text"
-              direction={Direction.column}
-              onChange={handleRegNumberChange}
-              required
-              value={form.registrationNumber}
-            />
-          </div>
-          <div className="arrival-form__button-group">
-            <Button
-              text="Start parking"
-              type="submit"
-              variant={Variant.primary}
-              handleClick={handleClick}
-            />
-          </div>
-        </form>
-        <div>
-          <h2>Pricing</h2>
-          <p>
-            {`First hour: ${garageData.prices.firstHourRate} ${garageData.prices.currency}`}
-          </p>
-          <p>
-            {`Second hour: ${garageData.prices.secondHourRate} ${garageData.prices.currency}`}
-          </p>
-          <p>{`Additional hours: ${garageData.prices.additionalHoursRate} ${garageData.prices.currency}`}</p>
         </div>
       </>
     );}

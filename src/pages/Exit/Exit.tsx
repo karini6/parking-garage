@@ -4,6 +4,7 @@ import { use, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router";
 import Button from "../../components/Button/Button";
 import Message from "../../components/Message/Message";
+import NavButton from "../../components/NavButton/NavButton";
 import TextInput from "../../components/TextInput/Input";
 import { DataContext } from "../../context/DataContext";
 import useCurrentSession from "../../hooks/useCurrentSession";
@@ -55,6 +56,7 @@ const Exit = () => {
     };
   return (
     <>
+      <NavButton text="Go back" navTo={paths.home} variant="tertiary" />
       <div style={{ minHeight: "20rem", boxSizing: "border-box" }}>
         <h1>Close parking</h1>
         {infoMessage?.text && <Message text={infoMessage?.text} />}

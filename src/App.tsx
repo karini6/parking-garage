@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { DataContext } from "./context/DataContext.tsx";
+import usePaymentData from "./hooks/usePaymentData.ts";
 import {
   floorData as floorDataMock,
   garageData as garageDataMock,
@@ -22,6 +23,7 @@ const App = () => {
   const [parkedVehiclesData, setParkedVehiclesData] = useState<
     ParkingSession[]
   >(parkedVehiclesDataMock);
+  const { getTotalCost } = usePaymentData();
 
 
   const handleNewParking = useCallback(
@@ -31,8 +33,8 @@ const App = () => {
           floor.floorNumber === currentFloor
             ? {
                 ...floor,
-                availableSpots: floor.occupiedSpots + 1,
-                occupiedSpots: floor.availableSpots - 1,
+                availableSpots: floor.availableSpots - 1,
+                occupiedSpots: floor.occupiedSpots + 1,
               }
             : floor
         )
@@ -50,8 +52,8 @@ const App = () => {
         if (!prevState) return prevState;
         return {
           ...prevState,
-          availableSpots: prevState.availableSpots++,
-          occupiedSpots: prevState.occupiedSpots--,
+          availableSpots: prevState.availableSpots--,
+          occupiedSpots: prevState.occupiedSpots++,
         };
       });
     },
@@ -59,37 +61,42 @@ const App = () => {
   );
     
 
-  const handleParkingEnd = (floorId: number, regNumber: string) => {
-    setFloorData((prevFloorData) =>
-      prevFloorData.map((floor) =>
-        floor.floorNumber === floorId
-          ? {
-              ...floor,
-              availableSpots: floor.occupiedSpots - 1,
-              occupiedSpots: floor.availableSpots + 1,
-            }
-          : floor
-      )
-    );
-    setParkedVehiclesData((prevVehiclesData) =>
-      prevVehiclesData.map((session) =>
-        session.vehicleRegistration === regNumber
-          ? {
-              ...session,
-              endTime: new Date(),
-            }
-          : session
-      )
-    );
-    setGarageData((prevState) => {
-      if (!prevState) return prevState;
-      return {
-        ...prevState,
-        availableSpots: prevState.availableSpots--,
-        occupiedSpots: prevState.occupiedSpots++
-      };
-    });
-  };
+  const handleParkingEnd = useCallback(
+    (floorId: number, regNumber: string) => {
+      const endTime = new Date();
+      setFloorData((prevFloorData) =>
+        prevFloorData.map((floor) =>
+          floor.floorNumber === floorId
+            ? {
+                ...floor,
+                availableSpots: floor.availableSpots + 1,
+                occupiedSpots: floor.occupiedSpots - 1,
+              }
+            : floor
+        )
+      );
+      setParkedVehiclesData((prevVehiclesData) =>
+        prevVehiclesData.map((session) =>
+          session.vehicleRegistration === regNumber
+            ? {
+                ...session,
+                endTime,
+                totalCost: getTotalCost(session.startTime, endTime),
+              }
+            : session
+        )
+      );
+      setGarageData((prevState) => {
+        if (!prevState) return prevState;
+        return {
+          ...prevState,
+          availableSpots: prevState.availableSpots++,
+          occupiedSpots: prevState.occupiedSpots--
+        };
+      });
+    },
+    [getTotalCost]
+  );
 
     const value = useMemo(
       () => ({
@@ -100,7 +107,7 @@ const App = () => {
         handleNewParking,
         handleParkingEnd,
       }),
-      [garageData, floorData, parkedVehiclesData, handleNewParking]
+      [garageData, floorData, parkedVehiclesData, handleNewParking, handleParkingEnd]
     );
 
   return (

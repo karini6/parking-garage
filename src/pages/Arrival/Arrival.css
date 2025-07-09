@@ -6,16 +6,37 @@
   margin-top: 2rem;
 }
 
-.arrival-form__input-group {
+.arrival-form-input-group {
   display: flex;
   flex-direction: column;
   margin: 1rem;
 }
 
-.arrival-form__button-group {
+.arrival-form-button-group {
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.pricing-wrapper {
+  width: 70vw;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-direction: column;
+}
+
+.pricing-header {
+  text-align: right;
+}
+
+.pricing-item {
+  margin: 0 auto;
+  margin-right: 0;
+}
+
+.pricing-item:last-of-type {
+  font-style: italic;
 }

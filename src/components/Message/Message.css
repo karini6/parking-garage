@@ -1,5 +1,5 @@
 .message {
-  margin: 0.5rem;
+  margin: 1rem 0.5rem;
   box-sizing: border-box;
 }
 
@@ -10,6 +10,11 @@
 .message-heading {
   font-size: 1.4rem;
   font-weight: 600;
+  margin: 0.125rem;
+}
+
+.message-text {
+  margin: 0.125rem;
 }
 
 .action-container {

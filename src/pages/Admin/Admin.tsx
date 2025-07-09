@@ -3,8 +3,10 @@ import Select from "../../components/Select/Select";
 import { Direction } from "../../types/enums";
 import type { Floor } from "../../types/types";
 
+import NavButton from "../../components/NavButton/NavButton";
 import { DataContext } from "../../context/DataContext";
 import useFloorOptions from "../../hooks/useFloorOptions";
+import paths from "../../paths";
 import "./Admin.css";
 
 const Admin = () => {
@@ -20,6 +22,7 @@ const Admin = () => {
 
     return (
       <>
+        <NavButton text="Go back" navTo={paths.home} variant="tertiary" />
         <h1>Availability</h1>
         <div className="admin-container">
           <div className="info-wrapper garage-info">

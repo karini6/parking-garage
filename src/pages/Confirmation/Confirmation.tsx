@@ -18,8 +18,11 @@ const Confirmation = () => {
     arrivingFrom: "arriving",
   };
   const { currentParkingSession } = useCurrentSession(regNumber);
-  const paymentData = usePaymentData(currentParkingSession?.startTime, currentParkingSession?.endTime);
-  const totalCost = paymentData?.totalCost;
+  const { getTotalCost, priceData } = usePaymentData();
+  const totalCost = getTotalCost(
+    currentParkingSession?.startTime,
+    currentParkingSession?.endTime
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,10 +42,11 @@ const Confirmation = () => {
       : "Your payment is received.";
 
   const receiptText = totalCost
-    ? `Total cost ${totalCost}`
+    ? `Total cost ${totalCost} ${priceData.currency}`
     : "No payment required.";
   return (
     <>
+      <NavButton text="Go back" navTo={paths.home} variant="tertiary" />
       <h1>Thank you!</h1>
       <h2>{paymentText}</h2>
       <p>{explanationText}</p>

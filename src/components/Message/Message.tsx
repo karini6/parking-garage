@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import "./Message.css";
 
 type MessageProps = {
-  heading?: string;
+    heading?: string;
     text: string;
     action?: ReactNode;
 }
